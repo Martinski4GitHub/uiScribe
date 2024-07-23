@@ -14,6 +14,8 @@
 p{font-weight:bolder}thead.collapsible-jquery{color:#fff;padding:0;width:100%;border:none;text-align:left;outline:none;cursor:pointer}thead.collapsible-jquery-config{color:#fff;padding:0;width:100%;border:none;text-align:left;outline:none;cursor:pointer}.btndisabled{border:1px solid #999!important;background-color:#ccc!important;color:#000!important;background:#ccc!important;text-shadow:none!important;cursor:default!important}input.settingvalue{margin-left:3px!important}label.settingvalue{vertical-align:top!important;width:90px!important;display:inline-block!important}
 </style>
 <script language="JavaScript" type="text/javascript" src="/ext/shared-jy/jquery.js"></script>
+<script language="JavaScript" type="text/javascript" src="/js/jquery.js"></script>
+<script language="JavaScript" type="text/javascript" src="/js/httpApi.js"></script>
 <script language="JavaScript" type="text/javascript" src="/state.js"></script>
 <script language="JavaScript" type="text/javascript" src="/general.js"></script>
 <script language="JavaScript" type="text/javascript" src="/popup.js"></script>
@@ -21,6 +23,11 @@ p{font-weight:bolder}thead.collapsible-jquery{color:#fff;padding:0;width:100%;bo
 <script language="JavaScript" type="text/javascript" src="/ext/shared-jy/detect.js"></script>
 <script language="JavaScript" type="text/javascript" src="/validator.js"></script>
 <script>
+
+/**----------------------------------------**/
+/** Modified by Martinski W. [2024-Jul-22] **/
+/**----------------------------------------**/
+
 function showDST(){
 	var system_timezone_dut = "<% nvram_get("time_zone"); %>";
 	if(system_timezone_dut.search("DST") >= 0 && "<% nvram_get("time_zone_dst"); %>" == "1"){
@@ -34,7 +41,7 @@ function LoadCustomSettings(){
 	custom_settings = <% get_custom_settings(); %>;
 	for (var prop in custom_settings){
 		if(Object.prototype.hasOwnProperty.call(custom_settings, prop)){
-			if(prop.indexOf("uiscribe") != -1 && prop.indexOf("uiscribe_version") == -1){
+			if (prop.indexOf("uiscribe") !== -1 && prop.indexOf("uiscribe_version") === -1){
 				eval("delete custom_settings."+prop)
 			}
 		}
